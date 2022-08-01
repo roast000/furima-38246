@@ -4,56 +4,67 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
 | email              | string | null: false |
 | encrypted_password | string | null: false |
-| name               | string | null: false |
-| profile            | text   | null: false |
-| occupation         | text   | null: false |
-| position           | string | null: false |
+| last_name          | string | null: false |
+| first_name         | string | null: false |
+| last_name_kana     | string | null: false |
+| last_name_kana     | string | null: false |
+| birth_day          | date   | null: false |
 
 ### Association
 
-- has_many :prototypes_users
-- has_many :prototypes, through: :prototypes_users
-- has_many :comments
+- has_many :items
+- has_one :purchaser
 
-## products テーブル
+## items テーブル
 
-| Column     | Type       | Options                       |
-| ------     | ------     | -----------------             |
-| title      | string     | null: false                   |
-| catch_copy | text       | null: false                   |
-| concept    | text       | null: false                   |
-| user       | references | null: false foreign_key: true |
+| Column            | Type       | Options                       |
+| ------            | ------     | -----------------             |
+| item_name         | string     | null: false                   |
+| item_text         | text       | null: false                   |
+| category          | string     | null: false                   |
+| item_status       | string     | null: false                   |
+| delivery_charge   | string     | null: false                   |
+| delivery_area     | string     | null: false                   |
+| delivery_day      | string     | null: false                   |
+| price             | string     | null: false                   |
+| user              | references | null: false foreign_key: true |
 
-
-### Association
-
-- has_many :prototypes_users
-- has_many :users, through: :room_users
-- has_many :comments
-
-## prototypes_users テーブル
-
-| Column       | Type       | Options                        |
-| ------       | ---------- | ------------------------------ |
-| user         | references | null: false, foreign_key: true |
-| prototypes   | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :prototypes
+- belongs_to :user
+- has_one :purchaser
+- has_many :images
+
+
+## purchasers テーブル
+
+| Column         | Type       | Options                        |
+| ------------   | ---------- | ------------------------------ |
+| post_code      | string     | null: false                    |
+| prefectures    | string     | null: false                    |
+| city           | string     | null: false                    |
+| address        | string     | null: false                    |
+| building_name  | string     | null: false                    |
+| phone_number   | string     | null: false                    |
+| user           | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :item
 - belongs_to :user
 
-## comments テーブル
 
-| Column   | Type       | Options                        |
-| -------  | ---------- | ------------------------------ |
-| content  | text       | null: false                    |
-| prototype| references | null: false, foreign_key: true |
-| user     | references | null: false, foreign_key: true |
+## images テーブル
+
+| Column         | Type       | Options                        |
+| ------------   | ---------- | ------------------------------ |
+| image          | string     | null: false                    |
+| item           | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :prototypes
-- belongs_to :user
+- belongs_to :items
