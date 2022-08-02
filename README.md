@@ -53,7 +53,7 @@
 - has_one :order_address
 
 
-## orders_addresss テーブル (発送先情報)
+## orders_addresses テーブル (発送先情報)
 
 | Column          | Type       | Options                        |
 | ------------    | ---------- | ------------------------------ |
