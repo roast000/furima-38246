@@ -2,58 +2,70 @@
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| name               | string | null: false |
-| profile            | text   | null: false |
-| occupation         | text   | null: false |
-| position           | string | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | -----------------------   |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| last_name_kana     | string | null: false               |
+| birth_day          | date   | null: false               |
 
 ### Association
 
-- has_many :prototypes_users
-- has_many :prototypes, through: :prototypes_users
-- has_many :comments
+- has_many :items
+- has_many :orders
 
-## products テーブル
+## items テーブル (商品情報)
 
-| Column     | Type       | Options                       |
-| ------     | ------     | -----------------             |
-| title      | string     | null: false                   |
-| catch_copy | text       | null: false                   |
-| concept    | text       | null: false                   |
-| user       | references | null: false foreign_key: true |
+| Column                 | Type       | Options                       |
+| ----------------       | ------     | -----------------             |
+| item_name              | string     | null: false                   |
+| item_text              | text       | null: false                   |
+| category_id            | integer    | null: false                   |
+| item_status_id         | integer    | null: false                   |
+| delivery_charge_id     | integer    | null: false                   |
+| prefecture_id          | integer    | null: false                   |
+| delivery_day_id        | integer    | null: false                   |
+| price                  | integer    | null: false                   |
+| user                   | references | null: false foreign_key: true |
 
-
-### Association
-
-- has_many :prototypes_users
-- has_many :users, through: :room_users
-- has_many :comments
-
-## prototypes_users テーブル
-
-| Column       | Type       | Options                        |
-| ------       | ---------- | ------------------------------ |
-| user         | references | null: false, foreign_key: true |
-| prototypes   | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :prototypes
 - belongs_to :user
+- has_one :order
 
-## comments テーブル
+## orders テーブル (購入者情報)
 
-| Column   | Type       | Options                        |
-| -------  | ---------- | ------------------------------ |
-| content  | text       | null: false                    |
-| prototype| references | null: false, foreign_key: true |
-| user     | references | null: false, foreign_key: true |
+| Column         | Type       | Options                           |
+| ----------     | ------     | --------------------------------- |
+| user           | references | null: false foreign_key: true     |
+| item           | references | null: false foreign_key: true     |
+
 
 ### Association
 
-- belongs_to :prototypes
 - belongs_to :user
+- belongs_to :item
+- has_one :order_address
+
+
+## orders_addresses テーブル (発送先情報)
+
+| Column          | Type       | Options                        |
+| ------------    | ---------- | ------------------------------ |
+| post_code       | string     | null: false                    |
+| prefecture_id   | string     | null: false                    |
+| city            | string     | null: false                    |
+| address         | string     | null: false                    |
+| building_name   | string     | 　　　　　　                     |
+| phone_number    | string     | null: false                    |
+| order           | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :order
+
