@@ -37,7 +37,6 @@
 
 - belongs_to :user
 - has_one :order
-- has_many :images
 
 ## order テーブル (購入者情報)
 
@@ -56,28 +55,17 @@
 
 ## orders_address テーブル (発送先情報)
 
-| Column         | Type       | Options                        |
-| ------------   | ---------- | ------------------------------ |
-| post_code      | string     | null: false                    |
-| prefecture     | string     | null: false                    |
-| city           | string     | null: false                    |
-| address        | string     | null: false                    |
-| building_name  | string     | 　　　　　　                     |
-| phone_number   | string     | null: false                    |
-| order          | references | null: false, foreign_key: true |
+| Column          | Type       | Options                        |
+| ------------    | ---------- | ------------------------------ |
+| post_code       | string     | null: false                    |
+| prefecture_id   | string     | null: false                    |
+| city            | string     | null: false                    |
+| address         | string     | null: false                    |
+| building_name   | string     | 　　　　　　                     |
+| phone_number    | string     | null: false                    |
+| order           | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :order
 
-
-## images テーブル
-
-| Column         | Type       | Options                        |
-| ------------   | ---------- | ------------------------------ |
-| image          | string     | null: false                    |
-| item           | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :items
