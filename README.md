@@ -28,7 +28,7 @@
 | item_status_id         | integer    | null: false                   |
 | delivery_charge_id     | integer    | null: false                   |
 | prefecture_id          | integer    | null: false                   |
-| delivery_day           | integer    | null: false                   |
+| delivery_day_id        | integer    | null: false                   |
 | price                  | integer    | null: false                   |
 | user                   | references | null: false foreign_key: true |
 
@@ -38,7 +38,7 @@
 - belongs_to :user
 - has_one :order
 
-## order テーブル (購入者情報)
+## orders テーブル (購入者情報)
 
 | Column         | Type       | Options                           |
 | ----------     | ------     | --------------------------------- |
@@ -53,7 +53,7 @@
 - has_one :order_address
 
 
-## orders_address テーブル (発送先情報)
+## orders_addresss テーブル (発送先情報)
 
 | Column          | Type       | Options                        |
 | ------------    | ---------- | ------------------------------ |
